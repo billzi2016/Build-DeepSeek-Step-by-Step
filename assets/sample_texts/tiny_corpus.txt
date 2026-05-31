@@ -1,0 +1,9 @@
+deepseek builds strong language models
+tokenizers split text into reusable subword units
+attention lets each token look at other tokens
+gqa reduces kv cache cost during inference
+mla compresses cached attention state
+moe increases total capacity with sparse activation
+pretraining builds the base model
+sft shapes instruction following behavior
+reward models score relative preferences

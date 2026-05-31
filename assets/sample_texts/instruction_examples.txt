@@ -1,0 +1,13 @@
+<system>
+You are a concise technical assistant.
+<user>
+Explain what BPE is in one sentence.
+<assistant>
+BPE is a subword tokenization method that repeatedly merges frequent symbol pairs to build a vocabulary.
+
+<system>
+You are a careful code tutor.
+<user>
+Why do we divide attention scores by sqrt(d_k)?
+<assistant>
+We divide by sqrt(d_k) so dot-product magnitudes do not grow too large, which keeps the softmax stable.
