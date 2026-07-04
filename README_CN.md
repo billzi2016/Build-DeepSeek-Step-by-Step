@@ -1,38 +1,38 @@
 # Build_DeepSeek_Step_by_Step
 
-`Build_DeepSeek_Step_by_Step` is an implementation-oriented project that breaks down the key modules behind modern LLMs from the ground up. It does not try to reproduce a full industrial training system. Instead, it decomposes a typical DeepSeek-like technical path into readable notebooks and teaching-oriented helper code, so readers can trace the full chain:
+`Build_DeepSeek_Step_by_Step` 是一个从零拆解现代 LLM 关键模块的实现型项目。它不尝试复刻完整工业训练系统，而是把一条典型的 DeepSeek-like 技术路线拆成清晰可读的 notebook 和教学辅助代码，让读者可以一路追踪：
 
-- how text becomes tokens
-- how tokens become embeddings
-- how attention works
-- what modern structures such as GQA, MLA, and MoE solve in engineering terms
-- how training progresses from pretraining to SFT, reward models, PPO, and GRPO
-- how data moves from collection, cleaning, and deduplication to trainable corpora
+- 文本如何变成 token
+- token 如何变成 embedding
+- attention 如何工作
+- GQA、MLA、MoE 这类现代结构到底在解决什么工程问题
+- 训练如何从 pretraining 一路走到 SFT、reward model、PPO、GRPO
+- 数据如何从采集、清洗、去重一路走到可训练语料
 
-The core goal of this project is not to stack terminology, but to connect modules, formulas, code, figures, and engineering meaning into one coherent learning path.
+这个项目的核心目标不是堆术语，而是把“模块、公式、代码、图、工程含义”放到同一条理解链上。
 
-## Current Coverage
+## 当前覆盖范围
 
-The project currently covers five main tracks:
+项目目前已经覆盖 5 条主线：
 
-1. **Foundational Math and Input Representation**
-   - vectors, matrices, softmax, masks
-   - tokenizers, BPE, embeddings
+1. **基础数学与输入表示**
+   - 向量、矩阵、softmax、mask
+   - tokenizer、BPE、embedding
 
-2. **Core Transformer Structure**
+2. **Transformer 基础结构**
    - self-attention
    - multi-head attention
    - RoPE
-   - RMSNorm, residual connections, FFN, SwiGLU
+   - RMSNorm、residual、FFN、SwiGLU
    - basic decoder-only block
 
-3. **Inference Efficiency and Capacity Scaling**
+3. **推理效率与容量扩展**
    - KV cache
    - MQA / GQA
    - MLA
    - MoE
 
-4. **Training and Alignment Pipeline**
+4. **训练与对齐链路**
    - pretraining
    - continued training
    - SFT
@@ -40,34 +40,34 @@ The project currently covers five main tracks:
    - RLHF
    - PPO / DPO / GRPO
 
-5. **Data Engineering Pipeline**
+5. **数据工程链路**
    - data collection / crawling
    - main-content extraction
    - cleaning / filtering
-   - exact deduplication / near-duplicate detection
+   - exact dedup / near-duplicate detection
    - quality bucketing
 
-An additional section covers:
+额外还补了一节：
 
-6. **Position Encoding Visualization**
-   - learned absolute position embeddings
-   - the original sinusoidal encoding from *Attention Is All You Need*
+6. **位置编码可视化**
+   - learned absolute
+   - original sinusoidal encoding from *Attention Is All You Need*
    - RoPE
    - relative bias
    - ALiBi
    - RoPE scaling intuition
    - 2D positional encoding
 
-## Project Characteristics
+## 项目特点
 
-- Each notebook focuses on one core question instead of mixing topics.
-- Explanations take priority over showing off technical complexity, and the code keeps intermediate results and tensor shapes visible where useful.
-- Important concepts are implemented minimally whenever possible instead of being left as definitions only.
-- Helper functions in `utils/` are also written in a teaching style, with detailed docstrings and comments.
-- The training and data sections are part of the main learning path, not side material.
-- File names consistently use numbers and underscores, with no spaces.
+- 每个 notebook 只聚焦一个核心问题，不混主题。
+- 解释优先级高于炫技，代码会尽量保留中间结果和 shape。
+- 重要部分尽量给出最小实现，而不是只给定义。
+- `utils/` 里的辅助函数也写成教学风格，docstring 和注释都偏详细。
+- 训练部分和数据部分不是挂件，而是主线的一部分。
+- 文件命名统一使用编号加下划线，不使用空格。
 
-## Current Directory Structure
+## 当前目录结构
 
 ```text
 Build_DeepSeek_Step_by_Step/
@@ -110,7 +110,7 @@ Build_DeepSeek_Step_by_Step/
       └─ raw_web_page_mock.html
 ```
 
-## Notebook Path
+## Notebook 路线
 
 ### Foundations
 
@@ -151,52 +151,52 @@ Build_DeepSeek_Step_by_Step/
 
 - `21_visualizing_position_encodings.ipynb`
 
-## What Is in `utils/`
+## `utils/` 里有什么
 
-`utils/` is not a placeholder directory. It is a teaching-oriented helper layer reused by the notebooks:
+`utils/` 不是简单占位，而是给 notebook 复用的教学辅助层：
 
 - [tokenizer_utils.py](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/utils/tokenizer_utils.py)
-  - tiny BPE, pair counting, merge replay, encode / decode
+  - 负责 tiny BPE、pair counting、merge replay、encode / decode
 - [attention_utils.py](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/utils/attention_utils.py)
-  - softmax, causal masks, single-head attention, head reshaping, KV cache intuition helpers
+  - 负责 softmax、causal mask、single-head attention、head reshape、KV cache 直觉函数
 - [visualization_utils.py](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/utils/visualization_utils.py)
-  - heatmaps, line traces, similarity matrices, figure saving
+  - 负责 heatmap、line trace、similarity matrix、figure 保存
 - [training_utils.py](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/utils/training_utils.py)
-  - cross entropy, masked SFT loss, pairwise reward loss, PPO, and GRPO toy helpers
+  - 负责 cross entropy、masked SFT loss、pairwise reward loss、PPO、GRPO toy helpers
 
-These files intentionally use a teaching style, so their comments are more detailed than a normal utility library.
+这些文件都偏教学风格，注释会故意写得比普通工具库更细。
 
-## What Is in `assets/`
+## `assets/` 里有什么
 
-`assets/` stores reusable static resources for the project.
+`assets/` 用来放项目中可复用的静态资源。
 
 - [assets/figures/README.md](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/assets/figures/README.md)
-  - explains how image assets should be archived
+  - 说明图像资源应该如何归档
 - [assets/sample_texts/tiny_corpus.txt](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/assets/sample_texts/tiny_corpus.txt)
-  - suitable for BPE and basic tokenization notebooks
+  - 适合 BPE 和基础 tokenization notebook 使用
 - [assets/sample_texts/instruction_examples.txt](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/assets/sample_texts/instruction_examples.txt)
-  - suitable for SFT / instruction-format notebooks
+  - 适合 SFT / instruction-format notebook 使用
 - [assets/sample_texts/raw_web_page_mock.html](/Users/bizi/Desktop/GitHub/Build-DeepSeek-Step-by-Step/assets/sample_texts/raw_web_page_mock.html)
-  - suitable for data collection / cleaning notebooks
+  - 适合 data collection / cleaning notebook 使用
 
-## Environment
+## 环境
 
-Python 3.11 is recommended. The first version of the notebooks mainly depends on:
+建议使用 Python 3.11。当前第一版 notebook 主要依赖：
 
 - `numpy`
 - `matplotlib`
 - `torch`
 - `jupyter`
 
-These dependencies are enough to support the project's minimal implementations, visualizations, and tensor experiments.
+这套依赖足够支撑项目里的最小实现、图像可视化和张量实验。
 
-## Scope Boundaries
+## 边界说明
 
-The current version still does not aim to provide:
+当前版本仍然不追求：
 
-- a full industrial-grade reproduction of the DeepSeek training stack
-- a distributed training system implementation
-- CUDA / Triton / FlashAttention kernel optimization
-- a complete inference-serving framework
+- 完整工业级 DeepSeek 训练栈复刻
+- 分布式训练系统实现
+- CUDA / Triton / FlashAttention 内核优化
+- 完整推理服务框架
 
-This project is closer to a runnable, explainable, and extensible technical dissection notebook. The priority is to explain the full path from modules, to architecture, to training, to data, rather than copying repositories or summarizing concepts.
+这个项目更像一份可运行、可解释、可继续扩展的技术拆解笔记。重点是把从模块、到结构、到训练、到数据的完整链路讲清楚，而不是做仓库搬运或概念摘要。
